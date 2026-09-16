@@ -1,0 +1,84 @@
+{
+  "info": {
+    "name": "Job Portal Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "jobId", "value": "" },
+    { "key": "applicationId", "value": "" },
+    { "key": "userId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Register Job Seeker",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"name\": \"John\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"jobseeker\",\n  \"skills\": [\"JavaScript\", \"Node.js\"],\n  \"experience\": 1,\n  \"education\": [{\"degree\": \"B.Tech\", \"institution\": \"ABC College\", \"year\": 2026}]\n}" },
+        "url": "{{baseUrl}}/user-api/register"
+      }
+    },
+    {
+      "name": "Register Employer",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"name\": \"Employer One\",\n  \"email\": \"employer@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"employer\"\n}" },
+        "url": "{{baseUrl}}/user-api/register"
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}" },
+        "url": "{{baseUrl}}/user-api/login"
+      }
+    },
+    {
+      "name": "Profile",
+      "request": { "method": "GET", "url": "{{baseUrl}}/user-api/profile" }
+    },
+    {
+      "name": "All Jobs",
+      "request": { "method": "GET", "url": "{{baseUrl}}/job-api/jobs" }
+    },
+    {
+      "name": "Create Job",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"title\": \"Backend Developer\",\n  \"companyName\": \"ABC Tech\",\n  \"description\": \"Build backend APIs\",\n  \"location\": \"Hyderabad\",\n  \"employmentType\": \"full-time\",\n  \"salaryMin\": 500000,\n  \"salaryMax\": 800000,\n  \"requiredSkills\": [\"Node.js\", \"MongoDB\"],\n  \"experienceRequirement\": 1,\n  \"applicationDeadline\": \"2026-12-31T23:59:59.000Z\"\n}" },
+        "url": "{{baseUrl}}/job-api/jobs"
+      }
+    },
+    {
+      "name": "Apply For Job",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"jobId\": \"{{jobId}}\",\n  \"resume\": \"resume.pdf\",\n  \"coverLetter\": \"I am interested in this job.\"\n}" },
+        "url": "{{baseUrl}}/application-api/applications"
+      }
+    },
+    {
+      "name": "My Applications",
+      "request": { "method": "GET", "url": "{{baseUrl}}/application-api/my-applications" }
+    },
+    {
+      "name": "Employer Applications",
+      "request": { "method": "GET", "url": "{{baseUrl}}/application-api/employer-applications" }
+    },
+    {
+      "name": "Update Application Status",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"status\": \"shortlisted\"\n}" },
+        "url": "{{baseUrl}}/application-api/applications/{{applicationId}}/status"
+      }
+    }
+  ]
+}
